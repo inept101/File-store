@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Login({ user }) {
+function Login({ user, setUser }) {
   const classes = useStyles();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [newUser, setNewUser] = useState({
@@ -60,7 +60,7 @@ function Login({ user }) {
           localStorage.setItem("user", JSON.stringify(newUser));
 
           setIsLoggedIn(true);
-          setNewUser(newUser);
+          setUser(newUser);
         }
       })
       .catch((err) => {

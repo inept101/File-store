@@ -4,6 +4,7 @@ import axios from "axios";
 import { Redirect } from "react-router-dom";
 
 function Dashboard({ user, token }) {
+  const { REACT_APP_CDN_ID, REACT_APP_UPLOAD_PRESET } = process.env;
   if (!user) {
     return <Redirect to="/" />;
   }
@@ -12,11 +13,11 @@ function Dashboard({ user, token }) {
 
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
-    formData.append("upload_preset", "pf3mksrp");
+    formData.append("upload_preset", `${REACT_APP_UPLOAD_PRESET}`);
     if (e.target.files[0].type === "application/pdf") {
       axios
         .post(
-          "https://api.cloudinary.com/v1_1/ddplgo0ru/image/upload",
+          `https://api.cloudinary.com/v1_1/${REACT_APP_CDN_ID}/image/upload`,
           formData
         )
         .then((res) => {
